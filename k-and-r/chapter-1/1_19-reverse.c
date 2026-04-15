@@ -11,9 +11,9 @@ void reverse(char line[]);
 int main() {
     char line[MAXLINE]; /* current input line */
     while (getLine(line) > 0) {
-        printf("input: %s\n", line);
+        printf("input: %s", line);
         reverse(line);
-        printf("output: %s\n", line);
+        printf("output: %s", line);
     }
     return 0;
 }
@@ -40,10 +40,11 @@ void reverse(char line[]) {
     for (; line[i] != '\0'; i++) {
         tempLine[i] = line[i];
     }
-    int endIndex = i;
+    // subtract 2 as we remove the trailing \n and \0
+    int endIndex = i - 2;
     // reverse-copy templine into line
-    for (int j = 1; j <= endIndex; j++) {
+    int j = 0;
+    for (; j <= endIndex; j++) {
         line[j] = tempLine[endIndex - j];
     }
-    printf("%s", line);
 }
