@@ -35,16 +35,15 @@ int getLine(char line[]) {
 /* reverses the string passed in */
 void reverse(char line[]) {
     char tempLine[MAXLINE];
-    // copy line into templine
+    // copy line into templine, including trailing \n and \0
     int i = 0;
     for (; line[i] != '\0'; i++) {
         tempLine[i] = line[i];
     }
-    // subtract 2 as we remove the trailing \n and \0
+    // subtract 2 as we skip the trailing \n and \0
     int endIndex = i - 2;
     // reverse-copy templine into line
-    int j = 0;
-    for (; j <= endIndex; j++) {
+    for (int j = 0; j <= endIndex; j++) {
         line[j] = tempLine[endIndex - j];
     }
 }
