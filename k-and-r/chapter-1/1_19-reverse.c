@@ -6,11 +6,14 @@ write a program that reverses its input a line at a time. */
 
 int getLine(char line[]);
 
+void reverse(char line[]);
+
 int main() {
-    int len;
     char line[MAXLINE]; /* current input line */
-    while ((len = getLine(line)) > 0) {
-        printf("%s", line);
+    while (getLine(line) > 0) {
+        printf("input: %s\n", line);
+        reverse(line);
+        printf("output: %s\n", line);
     }
     return 0;
 }
@@ -27,4 +30,20 @@ int getLine(char line[]) {
     }
     line[i] = '\0';
     return i;
+}
+
+/* reverses the string passed in */
+void reverse(char line[]) {
+    char tempLine[MAXLINE];
+    // copy line into templine
+    int i = 0;
+    for (; line[i] != '\0'; i++) {
+        tempLine[i] = line[i];
+    }
+    int endIndex = i;
+    // reverse-copy templine into line
+    for (int j = 1; j <= endIndex; j++) {
+        line[j] = tempLine[endIndex - j];
+    }
+    printf("%s", line);
 }
