@@ -35,27 +35,33 @@ int getLine(char line[]) {
 
 void entab(char line[]) {
     int col = 0;
-    int spacesSinceLastTabStop = 0;
+    int spaces = 0;
+
     for (int i = 0; line[i] != '\0'; i++) {
-        if (line[i] == '\t') {
-            printf("\t");
-            spacesSinceLastTabStop = 0;
-            col += TAB_LENGTH;
-        } else if (line[i] == ' ') {
-            if (spacesSinceLastTabStop == TAB_LENGTH) {
+        char c = line[i];
+
+        if (c == ' ') {
+            spaces++;
+            col++;
+            if (col % TAB_LENGTH == 0) {
                 printf("\t");
-                spacesSinceLastTabStop = 0;
-                col += TAB_LENGTH;
-            } else {
-                spacesSinceLastTabStop++;
-                col++;
+                spaces = 0;
             }
+        } else if (c == '\t') {
+            printf("\t");
+            col += TAB_LENGTH - (col % TAB_LENGTH);
+            spaces = 0;
         } else {
-            for (; spacesSinceLastTabStop > 0; spacesSinceLastTabStop--) {
+            while (spaces > 0) {
                 printf(" ");
-                col++;
+                spaces--;
             }
-            printf("%c", line[i]);
+            printf("%c", c);
+            col++;
         }
+    }
+    while (spaces > 0) {
+        printf(" ");
+        spaces--;
     }
 }
