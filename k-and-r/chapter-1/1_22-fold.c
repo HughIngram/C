@@ -15,12 +15,17 @@ before the specified column. */
  * - (with LINE_BREAK set to 4)
  * - all inputs & outputs end with \n
  * - no input can contain \n in the middle
+ * - ignore tabs for now
+ * "ab\n" - "ab\n"
  * "\n" -> "\n"
+ * "1234\n" -> "1234\n"
  * "12345678\n" -> "123-\n456-\n78\n"
  * "1234      \n" -> "1234\n"
  * "123 456" -> "123\n456\n"
  * "123  456\n" -> "123\n 456\n"
  * "12 345" -> "12\n345\n"
+ * "     \n" -> "\n"
+ * "123 456 789" -> "123\n456\n789\n"
  */
 int main() {
     char inputLine[MAX_LINE]; /* current input line */
