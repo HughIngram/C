@@ -6,13 +6,17 @@ Should n be a variable or a symbolic parameter? */
 
 int getLine(char line[]);
 
-#define TAB_LENGTH = 4;
+void detab(char line[]);
+
+#define TAB_LENGTH 4
 #define MAXLINE 1000 /* maximum input line length */
 
 int main() {
     char line[MAXLINE]; /* current input line */
     while (getLine(line) > 0) {
         printf("input: %s", line);
+        detab(line);
+        printf("\n");
     }
     return 0;
 }
@@ -29,4 +33,19 @@ int getLine(char line[]) {
     }
     line[i] = '\0';
     return i;
+}
+
+void detab(char line[]) {
+    int col = 0;
+    for (int i = 0; line[i] != '\0'; i++) {
+        if (line[i] == '\t') {
+            for (int spaces = TAB_LENGTH - (col % TAB_LENGTH); spaces > 0; spaces--) {
+                printf(" ");
+                col++;
+            }
+        } else {
+            printf("%c", line[i]);
+            col++;
+        }
+    }
 }
