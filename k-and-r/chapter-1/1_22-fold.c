@@ -1,10 +1,13 @@
 #include <stdio.h>
+#include <string.h>
 
 
 #define MAX_LINE 1000 /* maximum input line length */
-#define LINE_BREAK 4 /* output line length limit */
+#define LINE_BREAK 5 /* output line length limit (including trailing \n) */
 
 int getLine(char inputLine[]);
+
+void foldLine(char inputLine[]);
 
 /* Exercise 1-22. Write a program to "fold" long input lines into two or more shorter lines after
 the last non-blank character that occurs before the n-th column of input. Make sure your
@@ -22,7 +25,7 @@ before the specified column. */
  * "12345678\n" -> "123-\n456-\n78\n"
  * "1234      \n" -> "1234\n"
  * "123 456" -> "123\n456\n"
- * "123  456\n" -> "123\n 456\n"
+ * "123  456\n" -> "123\n456\n"
  * "12 345" -> "12\n345\n"
  * "     \n" -> "\n"
  * "123 456 789" -> "123\n456\n789\n"
@@ -32,6 +35,7 @@ int main() {
     int length;
     while ((length = getLine(inputLine)) > 0) {
         printf("length: %d\n", length);
+        foldLine(inputLine);
     }
     return 0;
 }
@@ -47,4 +51,12 @@ int getLine(char inputLine[]) {
     }
     inputLine[i] = '\0';
     return i;
+}
+
+void foldLine(char inputLine[]) {
+    if (strlen(inputLine) < LINE_BREAK) {
+        printf("%s", inputLine);
+    } else {
+
+    }
 }
