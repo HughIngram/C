@@ -7,7 +7,9 @@
 
 int getLine(char inputLine[]);
 
-void foldLine(char inputLine[]);
+void fold(char inputLine[]);
+
+void foldActual(char input[], char output[], int outputSize);
 
 /* Exercise 1-22. Write a program to "fold" long input lines into two or more shorter lines after
 the last non-blank character that occurs before the n-th column of input. Make sure your
@@ -35,7 +37,7 @@ int main() {
     int length;
     while ((length = getLine(inputLine)) > 0) {
         printf("length: %d\n", length);
-        foldLine(inputLine);
+        fold(inputLine);
     }
     return 0;
 }
@@ -53,10 +55,17 @@ int getLine(char inputLine[]) {
     return i;
 }
 
-void foldLine(char inputLine[]) {
-    if (strlen(inputLine) < LINE_BREAK) {
-        printf("%s", inputLine);
-    } else {
+void fold(char inputLine[]) {
+    char result[256];
+    foldActual(inputLine, result, sizeof(result));
+    printf("in: %s", inputLine);
+    printf("out: %s\n", result);
+}
 
-    }
+void foldActual(char input[], char output[], int outputSize) {
+    int c = 0;
+    int i = 0;
+    for (i = 0; input[i] != '\n'; ++i)
+        output[i] = input[i] + 1;
+    output[i] = '\0';
 }
